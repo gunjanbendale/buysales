@@ -7,13 +7,6 @@ db.once('open', function() {
     console.log("db connected");
 });
 
-// let emailSchema = new Schema({
-    // email: String
-  // })
-// let nameSchema = new Schema({
-    // name: String
-  // })
-
 let equipSchema = new Schema({
   userid: mongoose.Schema.Types.ObjectId,
   equipment : {
