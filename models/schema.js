@@ -11,6 +11,7 @@ let equipSchema = new Schema({
   userid: mongoose.Schema.Types.ObjectId,
   equipment : {
     equipid : mongoose.Schema.Types.ObjectId,
+    userid: mongoose.Schema.Types.ObjectId ,
     category : String,
     subcat :String,
     manufacturer : String,
@@ -19,18 +20,13 @@ let equipSchema = new Schema({
     condn : String,
     auctionorsell : Number,
     price : { 
-      auctionprice : String, 
+      base_bid : String, 
       sellnowprice : String,
     },
-    status : [String]
+    status : [String],
+    auctionid: String,
   }
 
-});
-
-let placeauction = new Schema({
-  userid : mongoose.Schema.Types.ObjectId,
-  equipid : mongoose.Schema.Types.ObjectId,
-  auctionid : Number,
 });
 
 let buynow = new Schema({
@@ -47,14 +43,18 @@ let auctionSchema = new Schema({
       to:Date,
   },
   image: String,
+  equip:[{
+    equipid: mongoose.Schema.Types.ObjectId ,
+    userid: String,
+    max_bid: Number,
+  }],
 });
 
-// var email=mongoose.model('Email', emailSchema);
-// var name=mongoose.model('name', nameSchema);
-
+// var placeauc = mongoose.model('auctionreq', placeauction);
 var createequip = mongoose.model('equipments',equipSchema);
-var placeauc = mongoose.model('auctionreq', placeauction);
 var buyn = mongoose.model('buynow',buynow);
-var auction = mongoose.model('auctionschema',auctionSchema);
 
-module.exports = { createequip,placeauc,buyn,auction};
+//auction
+var auction = mongoose.model('auctions',auctionSchema);
+
+module.exports = { createequip,buyn,auction};
